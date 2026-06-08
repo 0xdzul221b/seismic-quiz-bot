@@ -275,7 +275,7 @@ def home():
             let currentQuizId = 1;
             let userScore = 0;
             let timerInterval;
-            let timeLeft = 20; // 20 Seconds Matrix Timer
+            let timeLeft = 15; // 15 Seconds Matrix Timer
 
             // Web Audio API Synth Generator for Sci-Fi FX (No external assets needed)
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -414,13 +414,13 @@ def home():
                     showCompletionScreen();
                 }
             }
-
-            function shareOnX() {
-                const tweetText = encodeURIComponent(`🔒 Just secured my node protocols on the @SeismicNetwork compliance terminal! 🛡️ Final Score: ${userScore}/10.\n\nCan you decrypt the stack? Test your Web3 security IQ here:`);
-                const shareUrl = encodeURIComponent(window.location.href);
-                window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${shareUrl}`, '_blank');
-            }
-
+                    function shareOnX() {
+            // Project handle change to @SeismicSys
+            const tweetText = encodeURIComponent(`🔒 Just secured my node protocols on the @SeismicSys compliance terminal! 🛡️ Final Score: ${userScore}/10.\n\nCan you decrypt the stack? Test your Web3 security IQ here:`);
+            // Permanent custom website mapping layout
+            const shareUrl = encodeURIComponent('https://www.xdzul.xyz/');
+            window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${shareUrl}`, '_blank');
+        }
             function showCompletionScreen() {
                 clearInterval(timerInterval);
                 document.getElementById('progress').style.width = '100%';
