@@ -156,17 +156,17 @@ def home():
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
             
             /* Seismic Official Inspired Dark Ambient Background Setup */
-            body { 
-                background: radial-gradient(circle at 50% 0%, #161920 0%, #0d0f12 70%);
-                color: #e2e8f0; 
-                min-height: 100vh; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: center;
-                padding: 20px;
-                overflow-x: hidden;
-            }
+            body {
+    background: radial-gradient(circle at 50% 0%, #161920 0%, #0d0f12 70%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
             
             /* Matrix Grid Mesh Pattern Effect */
             body::before {
@@ -177,7 +177,7 @@ def home():
 
             .container { 
                 max-width: 550px; width: 100%; 
-                background: rgba(18, 22, 28, 0.8); 
+                background: rgba(43, 33, 38, 0.75);
                 border: 1px solid rgba(255, 255, 255, 0.07); 
                 border-radius: 16px; padding: 30px; 
                 box-shadow: 0 20px 40px rgba(0,0,0,0.5);
