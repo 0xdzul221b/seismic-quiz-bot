@@ -154,40 +154,43 @@ def home():
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             
-            body { 
-                background: radial-gradient(circle at 50% 0%, #8c737e 0%, #6e5560 50%, #2b2126 100%);
-                color: #f8fafc; 
-                font-family: 'Plus Jakarta Sans', sans-serif;
-                min-height: 100vh; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: center;
-                padding: 16px;
-                overflow-x: hidden;
-                position: relative;
-            }
-            
-            /* High-Tech Glowing Backdrop Elements */
-            body::before {
-                content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background-image: 
-                    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-                background-size: 24px 24px; z-index: 0; pointer-events: none;
-            }
+                    body { 
+            background: radial-gradient(circle at 50% 0%, #8c737e 0%, #6e5560 50%, #2b2126 100%);
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* High-Tech Glowing Backdrop Elements */
+        body::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 24px 24px; z-index: 0; pointer-events: none;
+        }
 
-            .container { 
-                max-width: 480px; width: 100%; 
-                background: rgba(43, 33, 38, 0.65); 
-                border: 1px solid rgba(255, 255, 255, 0.12); 
-                border-radius: 24px; padding: 28px 24px; 
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(110, 85, 96, 0.3);
-                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-                position: relative; z-index: 10;
-                animation: fadeIn 0.6s ease-out;
-            }
-
+        .container { 
+            width: 100%; 
+            max-width: 100%; 
+            min-height: 100vh; 
+            background: rgba(43, 33, 38, 0.55); 
+            border: none; 
+            border-radius: 0; 
+            padding: 40px 24px; 
+            box-shadow: none;
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
             .container::before {
                 content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
                 background: linear-gradient(90deg, #bfa0ac, #6e5560, #4f3b44);
