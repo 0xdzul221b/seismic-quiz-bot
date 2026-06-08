@@ -271,9 +271,57 @@ def home():
             <button class="action-btn" id="action-btn" onclick="loadNextQuiz()">Next Parameter →</button>
         </div>
 
-        <script>
-                        let currentQuizId = 1;
+                <script>
+            let currentQuizId = 1;
             let userScore = 0;
+            let timerInterval;
+            let timeLeft = 20; // 20 Seconds Matrix Timer
+
+            // Web Audio API Synth Generator for Sci-Fi FX (No external assets needed)
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            function playSound(type) {
+                try {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    if (type === 'correct') {
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.15);
+                        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                        osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+                    } else if (type === 'incorrect') {
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                        osc.frequency.linearRampToValueAtTime(90, audioCtx.currentTime + 0.25);
+                        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                        osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+                    }
+                } catch (e) { console.log("Audio contexts blocked"); }
+            }
+
+            function startTimer() {
+                clearInterval(timerInterval);
+                timeLeft = 20;
+                
+                // Dynamic Badge Tracker Injector for Countdown UI
+                const badge = document.querySelector('.badge');
+                if (badge) badge.innerHTML = `🔒 Compliance Active | ⏱️ ${timeLeft}s`;
+
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    if (badge) badge.innerHTML = `🔒 Compliance Active | ⏱️ ${timeLeft}s`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        autoTimeoutAnswer();
+                    }
+                }, 1000);
+            }
 
             async function loadQuiz(id) {
                 const feedbackDiv = document.getElementById('feedback');
@@ -302,12 +350,28 @@ def home():
                         btn.onclick = () => submitAnswer(quiz.id, opt.charAt(0));
                         optionsDiv.appendChild(btn);
                     });
+                    
+                    startTimer(); // Start tracking time countdown trace
                 } catch (err) {
                     showCompletionScreen();
                 }
             }
 
+            function autoTimeoutAnswer() {
+                const buttons = document.querySelectorAll('.option-card');
+                buttons.forEach(b => b.disabled = true);
+                playSound('incorrect');
+
+                const feedbackDiv = document.getElementById('feedback');
+                feedbackDiv.className = 'feedback-panel incorrect';
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.innerHTML = '<div class="feedback-title">⏰ Verification Timeout</div>Time signature expired. Security shield flagged this parameter as unverified.';
+                
+                document.getElementById('action-btn').style.display = 'block';
+            }
+
             async function submitAnswer(id, selectedLetter) {
+                clearInterval(timerInterval); // Halt ticking clock
                 const buttons = document.querySelectorAll('.option-card');
                 buttons.forEach(b => b.disabled = true);
                 
@@ -327,9 +391,11 @@ def home():
                     
                     if(result.correct) {
                         userScore++;
+                        playSound('correct');
                         feedbackDiv.classList.add('correct');
                         feedbackDiv.innerHTML = `<div class="feedback-title">✓ Shield Approved</div>${result.explanation}`;
                     } else {
+                        playSound('incorrect');
                         feedbackDiv.classList.add('incorrect');
                         feedbackDiv.innerHTML = `<div class="feedback-title">✗ Verification Blocked</div>Correct Path Option: <strong>${result.correct_answer}</strong>.<br>${result.explanation}`;
                     }
@@ -349,7 +415,14 @@ def home():
                 }
             }
 
+            function shareOnX() {
+                const tweetText = encodeURIComponent(`🔒 Just secured my node protocols on the @SeismicNetwork compliance terminal! 🛡️ Final Score: ${userScore}/10.\n\nCan you decrypt the stack? Test your Web3 security IQ here:`);
+                const shareUrl = encodeURIComponent(window.location.href);
+                window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${shareUrl}`, '_blank');
+            }
+
             function showCompletionScreen() {
+                clearInterval(timerInterval);
                 document.getElementById('progress').style.width = '100%';
                 document.getElementById('q-num').innerText = "Session Terminal Clear";
                 
@@ -370,8 +443,11 @@ def home():
                             <p style="font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Shield Score</p>
                             <p style="font-size: 32px; font-weight: 700; color: #ffffff; font-family: 'Space Grotesk', sans-serif;">${userScore} <span style="font-size: 18px; color: #6e5560;">/ 10</span></p>
                         </div>
-                        <p style="font-size: 14px; line-height: 1.6; color: #dfd5da; padding: 0 10px;">${performanceMatrix}</p>
-                        <button onclick="window.location.reload()" style="margin-top: 25px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Restart Terminal</button>
+                        <p style="font-size: 14px; line-height: 1.6; color: #dfd5da; padding: 0 10px; margin-bottom: 20px;">${performanceMatrix}</p>
+                        
+                        <button onclick="shareOnX()" style="width: 100%; background: #1d9bf0; color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px; margin-bottom: 12px;">🐦 Share Credentials on X</button>
+                        
+                        <button onclick="window.location.reload()" style="width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Restart Terminal</button>
                     </div>
                 `;
                 document.getElementById('options').innerHTML = '';
@@ -380,8 +456,8 @@ def home():
             }
 
             loadQuiz(currentQuizId);
-
         </script>
+
     </body>
     </html>
     """
