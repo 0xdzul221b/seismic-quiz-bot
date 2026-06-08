@@ -272,7 +272,8 @@ def home():
         </div>
 
         <script>
-            let currentQuizId = 1;
+                        let currentQuizId = 1;
+            let userScore = 0;
 
             async function loadQuiz(id) {
                 const feedbackDiv = document.getElementById('feedback');
@@ -280,7 +281,6 @@ def home():
                 if(feedbackDiv) feedbackDiv.style.display = 'none';
                 if(actionBtn) actionBtn.style.display = 'none';
                 
-                // Progress calculations update
                 document.getElementById('progress').style.width = `${id * 10}%`;
                 document.getElementById('q-num').innerText = `Parameter 0${id} / 10`;
                 
@@ -307,7 +307,7 @@ def home():
                 }
             }
 
-     async function submitAnswer(id, selectedLetter) {
+            async function submitAnswer(id, selectedLetter) {
                 const buttons = document.querySelectorAll('.option-card');
                 buttons.forEach(b => b.disabled = true);
                 
@@ -326,6 +326,7 @@ def home():
                     const result = await res.json();
                     
                     if(result.correct) {
+                        userScore++;
                         feedbackDiv.classList.add('correct');
                         feedbackDiv.innerHTML = `<div class="feedback-title">✓ Shield Approved</div>${result.explanation}`;
                     } else {
@@ -351,13 +352,35 @@ def home():
             function showCompletionScreen() {
                 document.getElementById('progress').style.width = '100%';
                 document.getElementById('q-num').innerText = "Session Terminal Clear";
-                document.getElementById('question').innerText = "🔒 You have successfully verified and mastered Seismic infrastructure's full privacy compliance parameters!";
+                
+                let performanceMatrix = "";
+                if(userScore >= 8) {
+                    performanceMatrix = "🏅 Exceptional performance! You have elite status encryption credentials.";
+                } else if(userScore >= 5) {
+                    performanceMatrix = "⚡ Good core comprehension. Basic security layer optimization recommended.";
+                } else {
+                    performanceMatrix = "⚠️ Network parameters vulnerability detected. Rerun security stack test guidelines.";
+                }
+
+                document.getElementById('question').innerHTML = `
+                    <div style="text-align: center; margin-top: 15px;">
+                        <span style="font-size: 42px;">🔒</span>
+                        <h2 style="font-size: 20px; color: #fff; margin: 15px 0 8px 0; font-family: 'Space Grotesk', sans-serif;">VERIFICATION COMPLETE</h2>
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 18px; border-radius: 14px; margin: 20px 0;">
+                            <p style="font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Shield Score</p>
+                            <p style="font-size: 32px; font-weight: 700; color: #ffffff; font-family: 'Space Grotesk', sans-serif;">${userScore} <span style="font-size: 18px; color: #6e5560;">/ 10</span></p>
+                        </div>
+                        <p style="font-size: 14px; line-height: 1.6; color: #dfd5da; padding: 0 10px;">${performanceMatrix}</p>
+                        <button onclick="window.location.reload()" style="margin-top: 25px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Restart Terminal</button>
+                    </div>
+                `;
                 document.getElementById('options').innerHTML = '';
                 document.getElementById('feedback').style.display = 'none';
                 document.getElementById('action-btn').style.display = 'none';
             }
 
             loadQuiz(currentQuizId);
+
         </script>
     </body>
     </html>
