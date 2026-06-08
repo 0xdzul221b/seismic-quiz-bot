@@ -140,8 +140,7 @@ def check_answer(data: AnswerCheckRequest):
         "correct_answer": selected_quiz["correct_answer"],
         "explanation": explanation
     }
-
-# Premium HTML Web UI Response for Root Path
+# Fully Optimized Premium Cyberpunk Web UI Response for Root Path
 @app.get("/", response_class=HTMLResponse)
 def home():
     html_content = """
@@ -149,142 +148,192 @@ def home():
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Seismic Systems | Shielded Quiz Bot</title>
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Seismic Network | Institutional Quiz Shield</title>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+            * { margin: 0; padding: 0; box-sizing: border-box; }
             
-            /* Seismic Official Inspired Dark Ambient Background Setup */
-            body {
-    background: radial-gradient(circle at 50% 0%, #161920 0%, #0d0f12 70%);
-    color: #e2e8f0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    overflow-x: hidden;
-}
+            body { 
+                background: radial-gradient(circle at 50% 0%, #8c737e 0%, #6e5560 50%, #2b2126 100%);
+                color: #f8fafc; 
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                min-height: 100vh; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                justify-content: center;
+                padding: 16px;
+                overflow-x: hidden;
+                position: relative;
+            }
             
-            /* Matrix Grid Mesh Pattern Effect */
+            /* High-Tech Glowing Backdrop Elements */
             body::before {
                 content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-                background-size: 30px 30px; z-index: -1; pointer-events: none;
+                background-image: 
+                    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+                background-size: 24px 24px; z-index: 0; pointer-events: none;
             }
 
             .container { 
-                max-width: 550px; width: 100%; 
-                background: rgba(43, 33, 38, 0.75);
-                border: 1px solid rgba(255, 255, 255, 0.07); 
-                border-radius: 16px; padding: 30px; 
-                box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-                backdrop-filter: blur(12px);
-                position: relative;
+                max-width: 480px; width: 100%; 
+                background: rgba(43, 33, 38, 0.65); 
+                border: 1px solid rgba(255, 255, 255, 0.12); 
+                border-radius: 24px; padding: 28px 24px; 
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(110, 85, 96, 0.3);
+                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+                position: relative; z-index: 10;
+                animation: fadeIn 0.6s ease-out;
             }
 
-            /* Neon Shield Accent Indicator */
             .container::before {
-                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-                background: linear-gradient(90deg, #3b82f6, #10b981);
-                border-radius: 16px 16px 0 0;
+                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+                background: linear-gradient(90deg, #bfa0ac, #6e5560, #4f3b44);
+                border-radius: 24px 24px 0 0;
             }
 
-            h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; text-align: center; color: #fff; letter-spacing: -0.5px; }
-            .subtitle { font-size: 13px; color: #94a3b8; text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+            /* Header Badges */
+            .brand-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 24px; }
+            h1 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
             
-            .quiz-box { display: block; }
-            .question-text { font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; color: #f1f5f9; }
-            
-            .options-container { display: flex; flex-direction: column; gap: 12px; }
-            .option-btn { 
-                background: rgba(255, 255, 255, 0.03); 
-                border: 1px solid rgba(255, 255, 255, 0.08); 
-                padding: 14px 18px; border-radius: 10px; 
-                color: #cbd5e1; font-size: 14px; text-align: left; 
-                cursor: pointer; transition: all 0.2s ease; 
+            .badge {
+                display: inline-flex; align-items: center; gap: 6px;
+                background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 6px 12px; border-radius: 100px; font-size: 11px; font-weight: 600;
+                color: #dfd5da; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px;
             }
-            .option-btn:hover { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.4); color: #fff; }
+
+            /* Progress Bar Tracker */
+            .progress-wrapper { width: 100%; background: rgba(255, 255, 255, 0.05); height: 6px; border-radius: 100px; margin-bottom: 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03); }
+            .progress-bar { height: 100%; width: 10%; background: linear-gradient(90deg, #bfa0ac, #e5d5db); border-radius: 100px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+            /* Question Frame */
+            .question-box { margin-bottom: 24px; }
+            .question-number { font-size: 12px; font-weight: 700; color: #bfa0ac; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+            .question-text { font-size: 16px; font-weight: 600; line-height: 1.5; color: #ffffff; }
             
-            .feedback-box { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; font-size: 14px; line-height: 1.5; }
-            .feedback-box.correct { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; }
-            .feedback-box.incorrect { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; }
-            
-            .next-btn { 
-                margin-top: 20px; width: 100%; background: #3b82f6; color: white; border: none; 
-                padding: 14px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; transition: background 0.2s;
+            /* Sleek Interactive Option Buttons */
+            .options-grid { display: flex; flex-direction: column; gap: 12px; }
+            .option-card { 
+                background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); 
+                padding: 16px; border-radius: 14px; color: #e2e8f0; font-size: 14px; font-weight: 500;
+                text-align: left; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                width: 100%; outline: none; -webkit-tap-highlight-color: transparent;
             }
-            .next-btn:hover { background: #2563eb; }
+            .option-card:hover { 
+                background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.25);
+                transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            .option-card:active { transform: translateY(0); }
+            
+            /* Professional Feedback Framework */
+            .feedback-panel { margin-top: 20px; padding: 16px; border-radius: 14px; display: none; font-size: 13px; line-height: 1.6; animation: slideUp 0.3s ease; }
+            .feedback-panel.correct { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); color: #34d399; }
+            .feedback-panel.incorrect { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #f87171; }
+            .feedback-title { font-weight: 700; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+            /* Premium Action Trigger */
+            .action-btn { 
+                margin-top: 20px; width: 100%; background: #ffffff; color: #2b2126; border: none; 
+                padding: 16px; border-radius: 14px; font-weight: 700; font-size: 14px; cursor: pointer; 
+                display: none; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;
+            }
+            .action-btn:hover { background: #e5d5db; transform: scale(1.01); }
+
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes slideUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>SEISMIC SYSTEMS</h1>
-            <div class="subtitle">🔒 Compliance & Privacy Shielded Quiz</div>
-            
-            <div class="quiz-box">
-                <div class="question-text" id="question">Loading dynamic hardware parameters...</div>
-                <div class="options-container" id="options"></div>
-                <div class="feedback-box" id="feedback"></div>
-                <button class="next-btn" id="next-btn" onclick="loadNextQuiz()">Next Parameter →</button>
+            <div class="brand-header">
+                <h1>Seismic Systems</h1>
+                <div class="badge">🔒 Compliance Layer Active</div>
             </div>
+
+            <div class="progress-wrapper">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            
+            <div class="question-box">
+                <div class="question-number" id="q-num">Parameter 01 / 10</div>
+                <div class="question-text" id="question">Initializing secure data node tracking...</div>
+            </div>
+
+            <div class="options-grid" id="options"></div>
+            <div class="feedback-panel" id="feedback"></div>
+            <button class="action-btn" id="action-btn" onclick="loadNextQuiz()">Next Parameter →</button>
         </div>
 
         <script>
             let currentQuizId = 1;
 
             async function loadQuiz(id) {
-                document.getElementById('feedback').style.display = 'none';
-                document.getElementById('next-btn').style.display = 'none';
+                const feedbackDiv = document.getElementById('feedback');
+                const actionBtn = document.getElementById('action-btn');
+                if(feedbackDiv) feedbackDiv.style.display = 'none';
+                if(actionBtn) actionBtn.style.display = 'none';
+                
+                // Progress calculations update
+                document.getElementById('progress').style.width = `${id * 10}%`;
+                document.getElementById('q-num').innerText = `Parameter 0${id} / 10`;
                 
                 try {
-                    const response = await fetch(`/api/quiz/${id}`);
-                    const quiz = await response.json();
+                    const baseUrl = window.location.origin;
+                    const response = await fetch(`${baseUrl}/api/quiz/${id}`);
+                    if (!response.ok) throw new Error();
                     
-                    document.getElementById('question').innerText = `Q${quiz.id}. ${quiz.question}`;
+                    const quiz = await response.json();
+                    document.getElementById('question').innerText = quiz.question;
+                    
                     const optionsDiv = document.getElementById('options');
                     optionsDiv.innerHTML = '';
                     
                     quiz.options.forEach(opt => {
                         const btn = document.createElement('button');
-                        btn.className = 'option-btn';
+                        btn.className = 'option-card';
                         btn.innerText = opt;
                         btn.onclick = () => submitAnswer(quiz.id, opt.charAt(0));
                         optionsDiv.appendChild(btn);
                     });
                 } catch (err) {
-                    document.getElementById('question').innerText = "All 10 cryptographic parameters successfully mapped!";
-                    document.getElementById('options').innerHTML = "";
+                    showCompletionScreen();
                 }
             }
 
-            async function submitAnswer(id, selectedLetter) {
-                const buttons = document.querySelectorAll('.option-btn');
+     async function submitAnswer(id, selectedLetter) {
+                const buttons = document.querySelectorAll('.option-card');
                 buttons.forEach(b => b.disabled = true);
                 
                 const feedbackDiv = document.getElementById('feedback');
-                feedbackDiv.className = 'feedback-box';
+                feedbackDiv.className = 'feedback-panel';
                 feedbackDiv.style.display = 'block';
-                feedbackDiv.innerText = "Decrypting verification flow from OpenRouter infrastructure...";
+                feedbackDiv.innerHTML = '<div class="feedback-title">Verification Engine</div>Decrypting execution trace via OpenRouter infrastructure...';
 
-                const res = await fetch('/api/check-answer', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ quiz_id: id, user_answer: selectedLetter })
-                });
-                const result = await res.json();
-                
-                if(result.correct) {
-                    feedbackDiv.classList.add('correct');
-                    feedbackDiv.innerText = "✓ Shield Verification Success! " + result.explanation;
-                } else {
+                try {
+                    const baseUrl = window.location.origin;
+                    const res = await fetch(`${baseUrl}/api/check-answer`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ quiz_id: id, user_answer: selectedLetter })
+                    });
+                    const result = await res.json();
+                    
+                    if(result.correct) {
+                        feedbackDiv.classList.add('correct');
+                        feedbackDiv.innerHTML = `<div class="feedback-title">✓ Shield Approved</div>${result.explanation}`;
+                    } else {
+                        feedbackDiv.classList.add('incorrect');
+                        feedbackDiv.innerHTML = `<div class="feedback-title">✗ Verification Blocked</div>Correct Path Option: <strong>${result.correct_answer}</strong>.<br>${result.explanation}`;
+                    }
+                } catch(e) {
                     feedbackDiv.classList.add('incorrect');
-                    feedbackDiv.innerText = "✗ Verification Blocked. Correct Answer: " + result.correct_answer + ". " + result.explanation;
+                    feedbackDiv.innerHTML = '<div class="feedback-title">System Error</div>Failed to securely check parameters.';
                 }
-                
-                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('action-btn').style.display = 'block';
             }
 
             function loadNextQuiz() {
@@ -292,14 +341,19 @@ def home():
                 if(currentQuizId <= 10) {
                     loadQuiz(currentQuizId);
                 } else {
-                    document.getElementById('question').innerText = "🔒 Session Cleared: You have successfully mastered Seismic infrastructure's full privacy compliance deck!";
-                    document.getElementById('options').innerHTML = '';
-                    document.getElementById('feedback').style.display = 'none';
-                    document.getElementById('next-btn').style.display = 'none';
+                    showCompletionScreen();
                 }
             }
 
-            // Initialization
+            function showCompletionScreen() {
+                document.getElementById('progress').style.width = '100%';
+                document.getElementById('q-num').innerText = "Session Terminal Clear";
+                document.getElementById('question').innerText = "🔒 You have successfully verified and mastered Seismic infrastructure's full privacy compliance parameters!";
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('action-btn').style.display = 'none';
+            }
+
             loadQuiz(currentQuizId);
         </script>
     </body>
