@@ -149,172 +149,212 @@ def home():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Seismic Network | Institutional Quiz Shield</title>
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <title>Xdzul Terminal Hub</title>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
         <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            
-                    body { 
-            background: radial-gradient(circle at 50% 0%, #8c737e 0%, #6e5560 50%, #2b2126 100%);
-            color: #f8fafc; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: flex-start;
-            padding: 0;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* High-Tech Glowing Backdrop Elements */
-        body::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 24px 24px; z-index: 0; pointer-events: none;
-        }
-
-        .container { 
-            width: 100%; 
-            max-width: 100%; 
-            min-height: 100vh; 
-            background: rgba(43, 33, 38, 0.55); 
-            border: none; 
-            border-radius: 0; 
-            padding: 40px 24px; 
-            box-shadow: none;
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            display: flex;
-            flex-direction: column;
-            z-index: 10;
-        }
-            .container::before {
-                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-                background: linear-gradient(90deg, #bfa0ac, #6e5560, #4f3b44);
-                border-radius: 24px 24px 0 0;
+            * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+            body {
+                background: radial-gradient(circle at 50% 0%, #1c192e 0%, #0d0b12 100%);
+                color: #f8fafc; min-height: 100vh; display: flex; overflow: hidden;
             }
 
-            /* Header Badges */
-            .brand-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 24px; }
-            h1 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
-            
-            .badge {
-                display: inline-flex; align-items: center; gap: 6px;
-                background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
-                padding: 6px 12px; border-radius: 100px; font-size: 11px; font-weight: 600;
-                color: #dfd5da; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+            /* Left Sidebar Layout Navigation Area (Home, Art, Quiz, Photograph) */
+            .sidebar {
+                width: 260px; background: rgba(255, 255, 255, 0.02);
+                border-right: 1px solid rgba(255, 255, 255, 0.06);
+                padding: 40px 24px; display: flex; flex-direction: column; gap: 40px;
+                backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             }
+            .brand { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+            .nav-links { display: flex; flex-direction: column; gap: 12px; }
+            .nav-item {
+                display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+                border-radius: 12px; color: #94a3b8; font-size: 14px; font-weight: 600;
+                cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid transparent;
+            }
+            .nav-item:hover { color: #fff; background: rgba(255, 255, 255, 0.04); }
+            .nav-item.active {
+                color: #fff; background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+            }
+            .nav-item .icon { font-size: 18px; }
 
-            /* Progress Bar Tracker */
-            .progress-wrapper { width: 100%; background: rgba(255, 255, 255, 0.05); height: 6px; border-radius: 100px; margin-bottom: 24px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03); }
-            .progress-bar { height: 100%; width: 10%; background: linear-gradient(90deg, #bfa0ac, #e5d5db); border-radius: 100px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-
-            /* Question Frame */
-            .question-box { margin-bottom: 24px; }
-            .question-number { font-size: 12px; font-weight: 700; color: #bfa0ac; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
-            .question-text { font-size: 16px; font-weight: 600; line-height: 1.5; color: #ffffff; }
-            
-            /* Sleek Interactive Option Buttons */
-            .options-grid { display: flex; flex-direction: column; gap: 12px; }
-            .option-card { 
-                background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); 
-                padding: 16px; border-radius: 14px; color: #e2e8f0; font-size: 14px; font-weight: 500;
-                text-align: left; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                width: 100%; outline: none; -webkit-tap-highlight-color: transparent;
-            }
-            .option-card:hover { 
-                background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.25);
-                transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            }
-            .option-card:active { transform: translateY(0); }
-            
-            /* Professional Feedback Framework */
-            .feedback-panel { margin-top: 20px; padding: 16px; border-radius: 14px; display: none; font-size: 13px; line-height: 1.6; animation: slideUp 0.3s ease; }
-            .feedback-panel.correct { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); color: #34d399; }
-            .feedback-panel.incorrect { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #f87171; }
-            .feedback-title { font-weight: 700; margin-bottom: 4px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-            /* Premium Action Trigger */
-            .action-btn { 
-                margin-top: 20px; width: 100%; background: #ffffff; color: #2b2126; border: none; 
-                padding: 16px; border-radius: 14px; font-weight: 700; font-size: 14px; cursor: pointer; 
-                display: none; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;
-            }
-            .action-btn:hover { background: #e5d5db; transform: scale(1.01); }
+            /* Right Content Main View Pane */
+            .main-content { flex: 1; padding: 40px; overflow-y: auto; display: flex; justify-content: center; align-items: center; position: relative; }
+            .content-tab { display: none; width: 100%; max-width: 520px; animation: fadeIn 0.5s ease; }
+            .content-tab.active { display: block; }
 
             @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-            @keyframes slideUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+            /* Premium Dark Hub Card Dashboard Core */
+            .hub-card {
+                background: rgba(43, 33, 38, 0.55); border: 1px solid rgba(255, 255, 255, 0.12);
+                padding: 40px 32px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); width: 100%;
+            }
+            h1 { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 8px; text-align: center; }
+            .subtitle { font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 25px; text-align: center; }
+            p { color: #dfd5da; font-size: 14px; line-height: 1.6; }
+
+            /* Dynamic Built-in Quiz Engine Interfaces */
+            .brand-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 24px; }
+            .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 600; color: #dfd5da; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+            .progress-wrapper { width: 100%; background: rgba(255,255,255,0.05); height: 6px; border-radius: 100px; margin-bottom: 24px; }
+            .progress-bar { height: 100%; width: 10%; background: linear-gradient(90deg, #bfa0ac, #e5d5db); border-radius: 100px; transition: width 0.4s ease; }
+            .question-box { margin-bottom: 24px; }
+            .question-number { font-size: 12px; font-weight: 700; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+            .question-text { font-size: 16px; font-weight: 600; line-height: 1.5; color: #ffffff; }
+            .options-grid { display: flex; flex-direction: column; gap: 12px; }
+            .option-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); padding: 16px; border-radius: 14px; color: #e2e8f0; font-size: 14px; text-align: left; cursor: pointer; width: 100%; outline: none; transition: all 0.2s; }
+            .option-card:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+            .feedback-panel { margin-top: 20px; padding: 16px; border-radius: 14px; display: none; font-size: 13px; line-height: 1.5; }
+            .feedback-panel.correct { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); color: #a7f3d0; }
+            .feedback-panel.incorrect { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #fca5a5; }
+            .feedback-title { font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+            .action-btn { margin-top: 20px; width: 100%; background: #ffffff; color: #2b2126; border: none; padding: 16px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; display: none; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+            
+            /* Photo Gallery Preview grid styles */
+            .photo-placeholder {
+                background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); 
+                padding: 40px; border-radius: 16px; text-align: center; color: #94a3b8; font-size: 13px;
+            }
+
+            @media(max-width: 768px) {
+                body { flex-direction: column; overflow: auto; }
+                .sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px; gap: 20px; }
+                .nav-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+                .nav-item { padding: 12px; font-size: 13px; justify-content: center; }
+                .main-content { padding: 20px; min-height: calc(100vh - 180px); }
+            }
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="brand-header">
-                <h1>Seismic Systems</h1>
-                <div class="badge">🔒 Compliance Layer Active</div>
-            </div>
 
-            <div class="progress-wrapper">
-                <div class="progress-bar" id="progress"></div>
+        <div class="sidebar">
+            <div class="brand">Welcome to Xdzul</div>
+            <div class="nav-links">
+                <div class="nav-item active" onclick="switchTab('home-tab', this)">
+                    <span class="icon">🏠</span> <span>Home</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('art-tab', this)">
+                    <span class="icon">🎨</span> <span>Art</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('quiz-tab', this)">
+                    <span class="icon">🛡️</span> <span>Quiz</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('photo-tab', this)">
+                    <span class="icon">📸</span> <span>Photograph</span>
+                </div>
             </div>
-            
-            <div class="question-box">
-                <div class="question-number" id="q-num">Parameter 01 / 10</div>
-                <div class="question-text" id="question">Initializing secure data node tracking...</div>
-            </div>
-
-            <div class="options-grid" id="options"></div>
-            <div class="feedback-panel" id="feedback"></div>
-            <button class="action-btn" id="action-btn" onclick="loadNextQuiz()">Next Parameter →</button>
         </div>
 
-                <script>
+        <div class="main-content">
+            
+            <div id="home-tab" class="content-tab active">
+                <div class="hub-card">
+                    <h1>Welcome to Xdzul's Core</h1>
+                    <div class="subtitle">🏠 Command Center Node</div>
+                    <p style="margin-bottom: 20px; text-align: center;">Hello! Welcome to your central responsive web dashboard node module framework.</p>
+                    <p style="text-align: center;">Left block configuration control list runtime utilize kore custom segments explore tracking active korun.</p>
+                </div>
+            </div>
+
+            <div id="art-tab" class="content-tab">
+                <div class="hub-card">
+                    <h1>Art Matrix Collection</h1>
+                    <div class="subtitle">🎨 Visual Artifact Hub</div>
+                    <p style="margin-bottom: 20px; text-align: center;">Ekhane apnar custom character concepts, digital models, dynamic graphics pipeline tracking render pipelines display hobe.</p>
+                    <div class="photo-placeholder">
+                        🖼️ Asset repository stream offline. Integrating render pipelines core...
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz-tab" class="content-tab">
+                <div class="hub-card">
+                    <div class="brand-header">
+                        <h1>Seismic Systems</h1>
+                        <div class="badge" id="badge-status">🔒 Compliance Active | ⏱️ <span id="timer-display">20</span>s</div>
+                    </div>
+                    
+                    <div class="progress-wrapper">
+                        <div class="progress-bar" id="progress"></div>
+                    </div>
+                    
+                    <div class="question-box">
+                        <div class="question-number" id="q-num">Parameter 01 / 10</div>
+                        <div class="question-text" id="question">Initializing terminal environment tracking protocols...</div>
+                    </div>
+                    
+                    <div class="options-grid" id="options"></div>
+                    <div class="feedback-panel" id="feedback"></div>
+                    <button class="action-btn" id="action-btn" onclick="loadNextQuiz()">Next Parameter</button>
+                </div>
+            </div>
+
+            <div id="photo-tab" class="content-tab">
+                <div class="hub-card">
+                    <h1>Photographic Archives</h1>
+                    <div class="subtitle">📸 Captured Logs Matrix</div>
+                    <p style="margin-bottom: 20px; text-align: center;">Ekhane apnar captured imagery snapshots, visual travel logs, environment frames sync updates stream thakbe.</p>
+                    <div class="photo-placeholder">
+                        📷 Media database interface offline. Initializing secure bucket routes...
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
             let currentQuizId = 1;
             let userScore = 0;
             let timerInterval;
-            let timeLeft = 15; // 15 Seconds Matrix Timer
+            let timeLeft = 20;
 
-            // Web Audio API Synth Generator for Sci-Fi FX (No external assets needed)
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             function playSound(type) {
                 try {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    
+                    osc.connect(gain); gain.connect(audioCtx.destination);
                     if (type === 'correct') {
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                        osc.type = 'sine'; osc.frequency.setValueAtTime(600, audioCtx.currentTime);
                         osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.15);
-                        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-                        osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+                        gain.gain.setValueAtTime(0.15, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.15);
                     } else if (type === 'incorrect') {
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                        osc.type = 'sawtooth'; osc.frequency.setValueAtTime(180, audioCtx.currentTime);
                         osc.frequency.linearRampToValueAtTime(90, audioCtx.currentTime + 0.25);
-                        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-                        osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+                        gain.gain.setValueAtTime(0.2, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + 0.25);
                     }
-                } catch (e) { console.log("Audio contexts blocked"); }
+                } catch (e) {}
+            }
+
+            // Clean View Tab Routing Matrix Controller
+            function switchTab(tabId, element) {
+                document.querySelectorAll('.content-tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                
+                document.getElementById(tabId).classList.add('active');
+                element.classList.add('active');
+                
+                // Keep the state of the ticking parameter engine clock locked when switching windows
+                if (tabId !== 'quiz-tab') {
+                    clearInterval(timerInterval);
+                } else if(currentQuizId <= 10) {
+                    startTimer();
+                }
             }
 
             function startTimer() {
                 clearInterval(timerInterval);
                 timeLeft = 20;
-                
-                // Dynamic Badge Tracker Injector for Countdown UI
-                const badge = document.querySelector('.badge');
-                if (badge) badge.innerHTML = `🔒 Compliance Active | ⏱️ ${timeLeft}s`;
+                const bDisplay = document.getElementById('badge-status');
+                if(bDisplay) bDisplay.innerHTML = `🔒 Compliance Active | ⏱️ <span id="timer-display">${timeLeft}</span>s`;
 
                 timerInterval = setInterval(() => {
                     timeLeft--;
-                    if (badge) badge.innerHTML = `🔒 Compliance Active | ⏱️ ${timeLeft}s`;
+                    const tSpan = document.getElementById('timer-display');
+                    if(tSpan) tSpan.innerText = timeLeft;
                     
                     if (timeLeft <= 0) {
                         clearInterval(timerInterval);
@@ -351,7 +391,9 @@ def home():
                         optionsDiv.appendChild(btn);
                     });
                     
-                    startTimer(); // Start tracking time countdown trace
+                    if(document.getElementById('quiz-tab').classList.contains('active')) {
+                        startTimer();
+                    }
                 } catch (err) {
                     showCompletionScreen();
                 }
@@ -365,20 +407,19 @@ def home():
                 const feedbackDiv = document.getElementById('feedback');
                 feedbackDiv.className = 'feedback-panel incorrect';
                 feedbackDiv.style.display = 'block';
-                feedbackDiv.innerHTML = '<div class="feedback-title">⏰ Verification Timeout</div>Time signature expired. Security shield flagged this parameter as unverified.';
-                
+                feedbackDiv.innerHTML = '<div class="feedback-title">⏰ Verification Timeout</div>Security validation link expired. System flagged this session trace as unverified.';
                 document.getElementById('action-btn').style.display = 'block';
             }
 
             async function submitAnswer(id, selectedLetter) {
-                clearInterval(timerInterval); // Halt ticking clock
+                clearInterval(timerInterval);
                 const buttons = document.querySelectorAll('.option-card');
                 buttons.forEach(b => b.disabled = true);
                 
                 const feedbackDiv = document.getElementById('feedback');
                 feedbackDiv.className = 'feedback-panel';
                 feedbackDiv.style.display = 'block';
-                feedbackDiv.innerHTML = '<div class="feedback-title">Verification Engine</div>Decrypting execution trace via OpenRouter infrastructure...';
+                feedbackDiv.innerHTML = '<div class="feedback-title">Verification Core</div>Decrypting network execution logs via OpenRouter cloud architecture...';
 
                 try {
                     const baseUrl = window.location.origin;
@@ -390,18 +431,17 @@ def home():
                     const result = await res.json();
                     
                     if(result.correct) {
-                        userScore++;
-                        playSound('correct');
-                        feedbackDiv.classList.add('correct');
+                        userScore++; playSound('correct');
+                        feedbackDiv.className = 'feedback-panel correct';
                         feedbackDiv.innerHTML = `<div class="feedback-title">✓ Shield Approved</div>${result.explanation}`;
                     } else {
                         playSound('incorrect');
-                        feedbackDiv.classList.add('incorrect');
-                        feedbackDiv.innerHTML = `<div class="feedback-title">✗ Verification Blocked</div>Correct Path Option: <strong>${result.correct_answer}</strong>.<br>${result.explanation}`;
+                        feedbackDiv.className = 'feedback-panel incorrect';
+                        feedbackDiv.innerHTML = `<div class="feedback-title">✗ Verification Blocked</div>Correct Node Target: <strong>${result.correct_answer}</strong>.<br>${result.explanation}`;
                     }
                 } catch(e) {
-                    feedbackDiv.classList.add('incorrect');
-                    feedbackDiv.innerHTML = '<div class="feedback-title">System Error</div>Failed to securely check parameters.';
+                    feedbackDiv.className = 'feedback-panel incorrect';
+                    feedbackDiv.innerHTML = '<div class="feedback-title">System Execution Fault</div>Failed to establish stable verification path channels.';
                 }
                 document.getElementById('action-btn').style.display = 'block';
             }
@@ -414,40 +454,34 @@ def home():
                     showCompletionScreen();
                 }
             }
-                    function shareOnX() {
-            // Project handle change to @SeismicSys
-            const tweetText = encodeURIComponent(`🔒 Just secured my node protocols on the @SeismicSys compliance terminal! 🛡️ Final Score: ${userScore}/10.\n\nCan you decrypt the stack? Test your Web3 security IQ here:`);
-            // Permanent custom website mapping layout
-            const shareUrl = encodeURIComponent('https://www.xdzul.xyz/');
-            window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${shareUrl}`, '_blank');
-        }
+
+            function shareOnX() {
+                const tweetText = encodeURIComponent(`🔒 Just secured my node protocols on the @SeismicNetwork compliance terminal! 🛡️ Final Score: ${userScore}/10.\n\nCan you decrypt the stack? Test your Web3 security IQ here:`);
+                const shareUrl = encodeURIComponent(window.location.href);
+                window.open(`https://twitter.com/intent/tweet?text=${tweetText}&url=${shareUrl}`, '_blank');
+            }
+
             function showCompletionScreen() {
                 clearInterval(timerInterval);
                 document.getElementById('progress').style.width = '100%';
-                document.getElementById('q-num').innerText = "Session Terminal Clear";
+                document.getElementById('q-num').innerText = "Session Terminal Completed";
                 
                 let performanceMatrix = "";
-                if(userScore >= 8) {
-                    performanceMatrix = "🏅 Exceptional performance! You have elite status encryption credentials.";
-                } else if(userScore >= 5) {
-                    performanceMatrix = "⚡ Good core comprehension. Basic security layer optimization recommended.";
-                } else {
-                    performanceMatrix = "⚠️ Network parameters vulnerability detected. Rerun security stack test guidelines.";
-                }
+                if(userScore >= 8) performanceMatrix = "🏅 Exceptional performance! You have high-tier cryptographic access credentials clearance.";
+                else if(userScore >= 5) performanceMatrix = "⚡ Fair operational comprehension. Protocol optimization parameters recommended.";
+                else performanceMatrix = "⚠️ Critical security protocol vulnerabilities detected. Review node specifications.";
 
                 document.getElementById('question').innerHTML = `
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span style="font-size: 42px;">🔒</span>
-                        <h2 style="font-size: 20px; color: #fff; margin: 15px 0 8px 0; font-family: 'Space Grotesk', sans-serif;">VERIFICATION COMPLETE</h2>
-                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 18px; border-radius: 14px; margin: 20px 0;">
-                            <p style="font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Shield Score</p>
-                            <p style="font-size: 32px; font-weight: 700; color: #ffffff; font-family: 'Space Grotesk', sans-serif;">${userScore} <span style="font-size: 18px; color: #6e5560;">/ 10</span></p>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <span style="font-size: 40px;">🛡️</span>
+                        <h2 style="font-size: 18px; color: #fff; margin: 12px 0 6px 0; font-family: 'Space Grotesk', sans-serif;">SESSION REPORT SYNCED</h2>
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 16px; border-radius: 14px; margin: 16px 0;">
+                            <p style="font-size: 12px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Verified Integrity Metrics</p>
+                            <p style="font-size: 30px; font-weight: 700; color: #ffffff; font-family: 'Space Grotesk', sans-serif;">${userScore} <span style="font-size: 16px; color: #76646e;">/ 10</span></p>
                         </div>
-                        <p style="font-size: 14px; line-height: 1.6; color: #dfd5da; padding: 0 10px; margin-bottom: 20px;">${performanceMatrix}</p>
-                        
-                        <button onclick="shareOnX()" style="width: 100%; background: #1d9bf0; color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px; margin-bottom: 12px;">🐦 Share Credentials on X</button>
-                        
-                        <button onclick="window.location.reload()" style="width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Restart Terminal</button>
+                        <p style="font-size: 13px; line-height: 1.5; color: #dfd5da; margin-bottom: 20px;">${performanceMatrix}</p>
+                        <button onclick="shareOnX()" style="width: 100%; background: #1d9bf0; color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; margin-bottom: 12px;">🐦 Share Metrics on X</button>
+                        <button onclick="window.location.reload()" style="width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer; text-transform: uppercase;">Re-verify Terminal Stack</button>
                     </div>
                 `;
                 document.getElementById('options').innerHTML = '';
@@ -455,9 +489,9 @@ def home():
                 document.getElementById('action-btn').style.display = 'none';
             }
 
+            // Start running parameters
             loadQuiz(currentQuizId);
         </script>
-
     </body>
     </html>
     """
