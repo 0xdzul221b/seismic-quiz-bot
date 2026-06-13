@@ -193,7 +193,7 @@ def home():
                 backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); width: 100%;
             }
             h1 { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 8px; text-align: center; }
-            .subtitle { font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 25px; text-align: center; }
+            .subtitle { font-size: 13px; color: #bfa0ac; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 25px; text-align: center; line-height: 1.4; }
             p { color: #dfd5da; font-size: 14px; line-height: 1.6; }
 
             /* Dynamic Built-in Quiz Engine Interfaces */
@@ -252,10 +252,9 @@ def home():
             
             <div id="home-tab" class="content-tab active">
                 <div class="hub-card">
-                    <h1>Welcome to Xdzul's Core</h1>
-                    <div class="subtitle">🏠 Command Center Node</div>
-                    <p style="margin-bottom: 20px; text-align: center;">Hello! Welcome to your central responsive web dashboard node module framework.</p>
-                    <p style="text-align: center;">Left block configuration control list runtime utilize kore custom segments explore tracking active korun.</p>
+                    <h1>Welcome to Xdzul’s Hub</h1>
+                    <div class="subtitle">✨ Unlocking the next level of entertainment. Art, quizzes, photography...everything you need to check.</div>
+                    <p style="text-align: center; color: #dfd5da; margin-top: 15px;">Left block configuration control list runtime utilize kore custom segments explore tracking active korun.</p>
                 </div>
             </div>
 
