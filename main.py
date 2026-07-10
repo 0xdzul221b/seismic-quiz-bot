@@ -13,13 +13,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- COMPLETE INTEGRATED QUIZ STORAGE ---
-SEISMIC_QUIZ_BANK = [
+# --- COMPLETE DYNAMIC SEPARATED SYSTEM QUIZ BANKS ---
+SEISMIC_QUIZ_1_BANK = [
     {"id": 1, "question": "What is the primary focus of Seismic?", "options": ["A) Public gaming networks", "B) Privacy-preserving, compliance-friendly blockchain for fintech", "C) Decentralized storage for video streaming", "D) High-frequency NFT trading platforms"], "answer": "B) Privacy-preserving, compliance-friendly blockchain for fintech"},
     {"id": 2, "question": "Which domain extension must be used for the Seismic Name Service?", "options": ["A) .eth", "B) .sol", "C) .size", "D) .crypto"], "answer": "C) .size"},
     {"id": 3, "question": "How does Seismic handle compliance and privacy?", "options": ["A) By making all transactions fully public", "B) Through programmable privacy features and encrypted state infrastructure", "C) By banning neobanks", "D) By using centralized databases"], "answer": "B) Through programmable privacy features and encrypted state infrastructure"},
     {"id": 4, "question": "Seismic is designed to primarily benefit which sector?", "options": ["A) Traditional art galleries", "B) Fintech and neobanks", "C) E-commerce supply chains", "D) Decentralized social media memes"], "answer": "B) Fintech and neobanks"},
-    {"id": 5, "question": "What core tech architecture does Seismic utilize for shielded records?", "options": ["A) Encrypted state infrastructure", "B) Unencrypted public ledgers", "C) Centralized SQL servers", "D) Proof-of-Work paper trails"], "answer": "A) Encrypted state infrastructure"}
+    {"id": 5, "question": "What core tech architecture does Seismic utilize for shielded records?", "options": ["A) Encrypted state infrastructure", "B) Unencrypted public ledgers", "C) Centralized SQL servers", "D) Proof-of-Work paper trails"], "answer": "A) Encrypted state infrastructure"},
+    {"id": 6, "question": "Which system component protects confidential states on Seismic?", "options": ["A) Public explorer trace", "B) Encrypted ledger architecture", "C) Open metadata logs", "D) Cloud access keys"], "answer": "B) Encrypted ledger architecture"},
+    {"id": 7, "question": "What entity type operates natively inside Seismic's ecosystem layer?", "options": ["A) Standard game servers", "B) Compliant neobanks & fintech applications", "C) Arbitrage algorithmic structures", "D) Central banks only"], "answer": "B) Compliant neobanks & fintech applications"},
+    {"id": 8, "question": "Seismic network allows what specialized asset interaction?", "options": ["A) Raw unshielded tracking", "B) Shielded financial asset generation and transfer", "C) Automated public high-risk mints", "D) Standard cloud storage tokens"], "answer": "B) Shielded financial asset generation and transfer"},
+    {"id": 9, "question": "Programmable privacy on Seismic implies which capability?", "options": ["A) Disabling privacy arbitrarily", "B) Developers defining granular access rules according to regulation", "C) Complete hiding from regulators", "D) Mandatory fully public data dumps"], "answer": "B) Developers defining granular access rules according to regulation"},
+    {"id": 10, "question": "What is the ultimate token ecosystem target for the Seismic network?", "options": ["A) High-leverage trading systems", "B) Compliant Web3 enterprise financial layers", "C) Basic meme distribution nodes", "D) Traditional point of sale hardware systems"], "answer": "B) Compliant Web3 enterprise financial layers"}
+]
+
+SEISMIC_QUIZ_2_BANK = [
+    {"id": 1, "question": "What core paradigm does Seismic introduce to decentralized finance?", "options": ["A) Complete transaction absolute anonymity", "B) Compliant, institution-ready programmable privacy", "C) Zero database architecture", "D) Liquid staking optimization hubs"], "answer": "B) Compliant, institution-ready programmable privacy"},
+    {"id": 2, "question": "How does Seismic manage cross-border neobank operations?", "options": ["A) By overriding local regulatory laws", "B) Through dynamic, verifiable rule execution filters inside contracts", "C) By requiring mandatory hardware passports", "D) By disabling public node confirmations"], "answer": "B) Through dynamic, verifiable rule execution filters inside contracts"},
+    {"id": 3, "question": "The encryption infrastructure on Seismic operates at what standard stack level?", "options": ["A) Network transport packet level only", "B) State storage and processing execution engine level", "C) Frontend client presentation layer only", "D) Decentralized domain service registry tier"], "answer": "B) State storage and processing execution engine level"},
+    {"id": 4, "question": "What unique advantage does the '.size' extension offer Seismic users?", "options": ["A) Faster visual loading speeds", "B) Secure identity mapping within the encrypted network", "C) High speculative pricing indices", "D) Integration with web2 search visibility trackers"], "answer": "B) Secure identity mapping within the encrypted network"},
+    {"id": 5, "question": "Which of these is a key use case for Seismic programmable privacy?", "options": ["A) Anonymous peer-to-peer dark net file swapping", "B) Verified corporate payroll automation with confidential salaries", "C) Public open-bidding digital artwork auctions", "D) Cloud compute allocation validation logging"], "answer": "B) Verified corporate payroll automation with confidential salaries"},
+    {"id": 6, "question": "What approach does Seismic take toward global anti-money laundering (AML) compliance?", "options": ["A) Bypassing audit capabilities", "B) Providing cryptographic zero-knowledge proof generation hooks for trusted auditories", "C) Storing raw user data documents publicly", "D) Outsourcing security entirely to off-chain cloud firms"], "answer": "B) Providing cryptographic zero-knowledge proof generation hooks for trusted auditories"},
+    {"id": 7, "question": "Why is standard public blockchain tech deficient for neobanks compared to Seismic?", "options": ["A) Public chains cannot process numeric smart contracts", "B) Public chains expose confidential customer balance data violating data laws", "C) Public networks are too fast for settlement frameworks", "D) Public systems don't have functional domains"], "answer": "B) Public chains expose confidential customer balance data violating data laws"},
+    {"id": 8, "question": "What property defines the Seismic shielded records state layer?", "options": ["A) It is visible to all network participants concurrently", "B) It is encrypted natively but remains auditable via access keys", "C) It is static and cannot be modified after initial setup", "D) It relies entirely on centralized hardware enclosures"], "answer": "B) It is encrypted natively but remains auditable via access keys"},
+    {"id": 9, "question": "Which category best represents Seismic smart contract architecture capabilities?", "options": ["A) Pure open public execution modules", "B) Confidential state modification and execution frameworks", "C) Static web page text indexing tables", "D) Automated token burning engines"], "answer": "B) Confidential state modification and execution frameworks"},
+    {"id": 10, "question": "How do transaction nodes process state proofs on Seismic securely?", "options": ["A) By revealing inputs to all active validating entities", "B) By verifying mathematical compliance proofs without exposing raw customer details", "C) By converting ledger systems into standard text files", "D) By asking centralized authorities for physical signatures"], "answer": "B) By verifying mathematical compliance proofs without exposing raw customer details"}
 ]
 
 PRISMAX_QUIZ_BANK = [
@@ -32,10 +50,12 @@ PRISMAX_QUIZ_BANK = [
 
 @app.get("/get-quiz/{quiz_type}")
 def get_quiz(quiz_type: str):
-    if quiz_type == "seismic":
-        bank = SEISMIC_QUIZ_BANK
+    if quiz_type == "seismic_1":
+        bank = SEISMIC_QUI_1_BANK
+    elif quiz_type == "seismic_2":
+        bank = SEISMIC_QUI_2_BANK
     elif quiz_type == "prismax":
-        bank = PRISMAX_QUIZ_BANK
+        bank = PRISMAX_QUI_BANK
     else:
         raise HTTPException(status_code=404, detail="Quiz module not found")
     
@@ -77,7 +97,6 @@ def serve_ui():
             text-align: center;
         }
 
-        /* --- NAVBAR TAB LAYOUT FIXED --- */
         .nav-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -108,7 +127,6 @@ def serve_ui():
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
         }
 
-        /* --- MAIN CONTENT CARD --- */
         .content-card {
             background: rgba(22, 18, 16, 0.8);
             backdrop-filter: blur(30px);
@@ -122,23 +140,12 @@ def serve_ui():
             box-sizing: border-box;
         }
 
-        .view-section {
-            display: none;
-        }
-        .view-section.active {
-            display: block;
-        }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .header h2 {
-            font-size: 24px;
-            margin: 0;
-            color: #ffffff;
-            font-weight: 700;
-        }
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h2 { font-size: 24px; margin: 0; color: #ffffff; font-weight: 700; }
+        
         .subtitle {
             font-size: 11px;
             color: #9c9893;
@@ -154,12 +161,8 @@ def serve_ui():
             font-weight: 600;
         }
         
-        /* --- QUIZ SELECTION HUB --- */
-        .hub-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
+        .hub-container { display: flex; flex-direction: column; gap: 14px; }
+        
         .hub-btn {
             background: rgba(36, 30, 27, 0.5);
             border: 1px solid rgba(237, 228, 213, 0.08);
@@ -179,12 +182,8 @@ def serve_ui():
             color: rgb(237, 228, 213);
             margin-bottom: 4px;
         }
-        .hub-btn .desc {
-            font-size: 12px;
-            color: #9c9893;
-        }
+        .hub-btn .desc { font-size: 12px; color: #9c9893; }
 
-        /* --- RUNTIME CONTROLS --- */
         .parameter-label {
             font-size: 11px;
             color: #9c9893;
@@ -206,16 +205,9 @@ def serve_ui():
             background: linear-gradient(90deg, rgb(149, 121, 91), rgb(237, 228, 213));
             transition: width 1s linear;
         }
-        .question {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .question { font-size: 16px; line-height: 1.5; margin-bottom: 24px; }
+        .options-container { display: flex; flex-direction: column; gap: 12px; }
+        
         .option-btn {
             background: rgba(36, 30, 27, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -290,9 +282,13 @@ def serve_ui():
             <div id="quiz-card-flow">
                 <div class="header"><h2>Select Verification Hub</h2></div>
                 <div class="hub-container">
-                    <div class="hub-btn" onclick="startQuizModule('seismic')">
-                        <div class="title">🔐 Seismic Quiz</div>
-                        <div class="desc">Privacy-preserving compliance blockchain verification setup.</div>
+                    <div class="hub-btn" onclick="startQuizModule('seismic_1')">
+                        <div class="title">🔐 Seismic Quiz 1</div>
+                        <div class="desc">Privacy blockchain baseline metrics verification parameters.</div>
+                    </div>
+                    <div class="hub-btn" onclick="startQuizModule('seismic_2')">
+                        <div class="title">🔐 Seismic Quiz 2</div>
+                        <div class="desc">Advanced institution execution, encrypted stack data layer trace.</div>
                     </div>
                     <div class="hub-btn" onclick="startQuizModule('prismax')">
                         <div class="title">🤖 PrismaX Quiz</div>
@@ -308,7 +304,6 @@ def serve_ui():
         let quizzes=[],currentIdx=0,score=0,timeLeft=15,timerInterval=null,canClick=true,isTabActive=true;
         let activeQuizType = '';
 
-        // Tab Switching Logic Fix
         function switchTab(tabName) {
             clearInterval(timerInterval);
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -334,9 +329,13 @@ def serve_ui():
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div class="header"><h2>Select Verification Hub</h2></div>
                 <div class="hub-container">
-                    <div class="hub-btn" onclick="startQuizModule('seismic')">
-                        <div class="title">🔐 Seismic Quiz</div>
-                        <div class="desc">Privacy-preserving compliance blockchain verification setup.</div>
+                    <div class="hub-btn" onclick="startQuizModule('seismic_1')">
+                        <div class="title">🔐 Seismic Quiz 1</div>
+                        <div class="desc">Privacy blockchain baseline metrics verification parameters.</div>
+                    </div>
+                    <div class="hub-btn" onclick="startQuizModule('seismic_2')">
+                        <div class="title">🔐 Seismic Quiz 2</div>
+                        <div class="desc">Advanced institution execution, encrypted stack data layer trace.</div>
                     </div>
                     <div class="hub-btn" onclick="startQuizModule('prismax')">
                         <div class="title">🤖 PrismaX Quiz</div>
@@ -347,8 +346,16 @@ def serve_ui():
 
         async function startQuizModule(type) {
             activeQuizType = type;
-            let title = type === 'seismic' ? 'Seismic Systems' : 'PrismaX';
-            let subtitle = type === 'seismic' ? '🔒 COMPLIANCE ACTIVE | ⏱️ 0 S' : '🔒 PHYSICAL AI & DATA SHIELDED QUIZ';
+            let title = 'PrismaX';
+            let subtitle = '🔒 PHYSICAL AI & DATA SHIELDED QUIZ';
+            
+            if(type === 'seismic_1') {
+                title = 'Seismic Systems I';
+                subtitle = '🔒 COMPLIANCE METRICS | PART I';
+            } else if(type === 'seismic_2') {
+                title = 'Seismic Systems II';
+                subtitle = '🔒 ENCRYPTED DATA LAYER | PART II';
+            }
             
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div class="header">
