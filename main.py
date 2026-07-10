@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- COMPLETE DYNAMIC SEPARATED SYSTEM QUIZ BANKS ---
+# --- CORRECTED INTEGRATED SYSTEM DATA ---
 SEISMIC_QUIZ_1_BANK = [
     {"id": 1, "question": "What is the primary focus of Seismic?", "options": ["A) Public gaming networks", "B) Privacy-preserving, compliance-friendly blockchain for fintech", "C) Decentralized storage for video streaming", "D) High-frequency NFT trading platforms"], "answer": "B) Privacy-preserving, compliance-friendly blockchain for fintech"},
     {"id": 2, "question": "Which domain extension must be used for the Seismic Name Service?", "options": ["A) .eth", "B) .sol", "C) .size", "D) .crypto"], "answer": "C) .size"},
@@ -51,11 +51,11 @@ PRISMAX_QUIZ_BANK = [
 @app.get("/get-quiz/{quiz_type}")
 def get_quiz(quiz_type: str):
     if quiz_type == "seismic_1":
-        bank = SEISMIC_QUI_1_BANK
+        bank = SEISMIC_QUIZ_1_BANK
     elif quiz_type == "seismic_2":
-        bank = SEISMIC_QUI_2_BANK
+        bank = SEISMIC_QUIZ_2_BANK
     elif quiz_type == "prismax":
-        bank = PRISMAX_QUI_BANK
+        bank = PRISMAX_QUIZ_BANK
     else:
         raise HTTPException(status_code=404, detail="Quiz module not found")
     
@@ -292,7 +292,7 @@ def serve_ui():
                     </div>
                     <div class="hub-btn" onclick="startQuizModule('prismax')">
                         <div class="title">🤖 PrismaX Quiz</div>
-                        <div class="desc">Physical AI & decentralized data shielded robotic model parameters.</div>
+                        <div class="desc">Physical AI & data shielded quiz.</div>
                     </div>
                 </div>
             </div>
@@ -339,7 +339,7 @@ def serve_ui():
                     </div>
                     <div class="hub-btn" onclick="startQuizModule('prismax')">
                         <div class="title">🤖 PrismaX Quiz</div>
-                        <div class="desc">Physical AI & decentralized data shielded robotic model parameters.</div>
+                        <div class="desc">Physical AI & data shielded quiz.</div>
                     </div>
                 </div>`;
         }
@@ -359,8 +359,8 @@ def serve_ui():
             
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div class="header">
-                    <h2>\${title}</h2>
-                    <div class="subtitle">\${subtitle}</div>
+                    <h2>\--title--</h2>
+                    <div class="subtitle">\--subtitle--</div>
                 </div>
                 <div id="quiz-runtime">
                     <div class="parameter-label" id="param-track">PARAMETER 00 / 00</div>
@@ -369,7 +369,7 @@ def serve_ui():
                     <div class="options-container" id="opts-area"></div>
                     <div id="alert-space"></div>
                     <button class="next-btn" id="next-action" disabled onclick="advanceSequence()">Next Parameter</button>
-                </div>`;
+                </div>`.replace('\--title--', title).replace('\--subtitle--', subtitle);
                 
             try{
                 let e=await fetch(`/get-quiz/\${type}`),t=await e.json();
