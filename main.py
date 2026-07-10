@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- COMPLETE DYNAMIC SEPARATED SYSTEM QUIZ BANKS ---
+# --- INJECTED SYSTEM RAW DATA (SHUFFLED OPTIONS LOGIC APPLIED) ---
 SEISMIC_QUIZ_1_BANK = [
     {"id": 1, "question": "What is the primary focus of Seismic?", "options": ["A) Public gaming networks", "B) Privacy-preserving, compliance-friendly blockchain for fintech", "C) Decentralized storage for video streaming", "D) High-frequency NFT trading platforms"], "answer": "B) Privacy-preserving, compliance-friendly blockchain for fintech"},
     {"id": 2, "question": "Which domain extension must be used for the Seismic Name Service?", "options": ["A) .eth", "B) .sol", "C) .size", "D) .crypto"], "answer": "C) .size"},
@@ -51,16 +51,30 @@ PRISMAX_QUIZ_BANK = [
 @app.get("/get-quiz/{quiz_type}")
 def get_quiz(quiz_type: str):
     if quiz_type == "seismic_1":
-        bank = SEISMIC_QUIZ_1_BANK
+        raw_bank = SEISMIC_QUIZ_1_BANK
     elif quiz_type == "seismic_2":
-        bank = SEISMIC_QUIZ_2_BANK
+        raw_bank = SEISMIC_QUIZ_2_BANK
     elif quiz_type == "prismax":
-        bank = PRISMAX_QUIZ_BANK
+        raw_bank = PRISMAX_QUIZ_BANK
     else:
         raise HTTPException(status_code=404, detail="Quiz module not found")
     
-    sample_size = min(len(bank), 10)
-    return {"status": "success", "total": sample_size, "quizzes": random.sample(bank, sample_size)}
+    sample_size = min(len(raw_bank), 10)
+    selected_quizzes = random.sample(raw_bank, sample_size)
+    
+    # DYNAMIC JUMBLE/SHUFFLE LOGIC TO RENDER OPTIONS COMPLETELY RANDOMIZED ON RUNTIME
+    processed_quizzes = []
+    for item in selected_quizzes:
+        shuffled_options = list(item["options"])
+        random.shuffle(shuffled_options)
+        processed_quizzes.append({
+            "id": item["id"],
+            "question": item["question"],
+            "options": shuffled_options,
+            "answer": item["answer"]
+        })
+        
+    return {"status": "success", "total": sample_size, "quizzes": processed_quizzes}
 
 @app.get("/", response_class=HTMLResponse)
 def serve_ui():
@@ -247,6 +261,21 @@ def serve_ui():
             width: 100%;
             margin-top: 20px;
         }
+        .share-btn {
+            background: #1da1f2;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
         .next-btn:disabled { opacity: 0.4; }
     </style>
 </head>
@@ -263,25 +292,21 @@ def serve_ui():
 
     <div class="content-card">
         
-        <!-- HOME SECTION -->
         <div id="sec-home" class="view-section">
             <div class="header"><h2>Home Node</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Welcome back to the main node console.</p>
         </div>
 
-        <!-- ART SECTION -->
         <div id="sec-art" class="view-section">
             <div class="header"><h2>Art Gallery</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Digital canvas elements and asset collections.</p>
         </div>
 
-        <!-- PHOTOGRAPH SECTION -->
         <div id="sec-photo" class="view-section">
             <div class="header"><h2>Photographs</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Captured snapshots and visual traces.</p>
         </div>
 
-        <!-- QUIZ PORTAL NODE -->
         <div id="sec-quiz" class="view-section active">
             <div id="quiz-card-flow">
                 <div class="header"><h2>Select Verification Hub</h2></div>
@@ -305,7 +330,8 @@ def serve_ui():
     </div>
 
     <script>
-        let quizzes=[],currentIdx=0,score=0,timeLeft=15,timerInterval=null,canClick=true,isTabActive=true;
+        // 30 SECONDS CONFIGURATION REGISTERED
+        let quizzes=[],currentIdx=0,score=0,timeLeft=30,timerInterval=null,canClick=true,isTabActive=true;
         let activeQuizType = '';
 
         function switchTab(tabName) {
@@ -389,7 +415,7 @@ def serve_ui():
 
         function startTimer(){
             clearInterval(timerInterval);
-            timeLeft=15; canClick=true; updateTimerBar();
+            timeLeft=30; canClick=true; updateTimerBar();
             timerInterval=setInterval(()=>{
                 if(!isTabActive) return;
                 timeLeft--; updateTimerBar();
@@ -399,7 +425,7 @@ def serve_ui():
 
         function updateTimerBar(){
             let el = document.getElementById("t-bar");
-            if(el) el.style.width=(timeLeft/15)*100+"%";
+            if(el) el.style.width=(timeLeft/30)*100+"%";
         }
 
         function renderQuestion(){
@@ -458,12 +484,23 @@ def serve_ui():
             renderQuestion();
         }
 
+        // TRIGGER SHARE PROTOCOL FOR X (TWITTER) INTEGRATION ON FINAL STATE SCREEN
+        function shareOnX() {
+            let contextName = "PrismaX Niche";
+            if(activeQuizType.includes("seismic")) contextName = "Seismic Blockchain network";
+            
+            let text = encodeURIComponent("I just completed the " + contextName + " verification hub quiz on Xdzul! Score: " + score + "/" + quizzes.length + ". Checked my knowledge metrics tier! 🎯🛡️ @xdzul");
+            let url = "https://xdzul.com";
+            window.open("https://x.com/intent/tweet?text=" + text + "&url=" + encodeURIComponent(url), "_blank");
+        }
+
         function showFinalAnalytics(){
             clearInterval(timerInterval);
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div style="text-align:center;">
                     <h2 style="color:rgb(237, 228, 213); font-size:20px; margin-bottom:8px;">Session Terminated</h2>
                     <p style="font-size:24px; color:#ffffff; font-weight:800; margin-bottom:25px;">Score: ` + score + ` / ` + quizzes.length + `</p>
+                    <button class="share-btn" onclick="shareOnX()">𝕏 Share on X</button>
                     <button class="restart-btn" style="background:linear-gradient(90deg, rgb(149, 121, 91), rgb(237, 228, 213));" onclick="resetToHubView()">Return to Dashboard</button>
                 </div>`;
         }
