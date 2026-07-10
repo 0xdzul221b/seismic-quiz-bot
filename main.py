@@ -68,7 +68,6 @@ def serve_ui():
             box-sizing: border-box;
         }
 
-        /* --- TOP LANDING FORMAT --- */
         .main-title {
             font-size: 26px;
             font-weight: 700;
@@ -78,7 +77,7 @@ def serve_ui():
             text-align: center;
         }
 
-        /* --- PRESERVATION OF NAVBAR TAB LAYOUT --- */
+        /* --- NAVBAR TAB LAYOUT FIXED --- */
         .nav-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -109,8 +108,8 @@ def serve_ui():
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
         }
 
-        /* --- NATIVE MAIN CARD MODULE --- */
-        .quiz-card {
+        /* --- MAIN CONTENT CARD --- */
+        .content-card {
             background: rgba(22, 18, 16, 0.8);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
@@ -123,6 +122,13 @@ def serve_ui():
             box-sizing: border-box;
         }
 
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+        }
+
         .header {
             text-align: center;
             margin-bottom: 24px;
@@ -132,7 +138,6 @@ def serve_ui():
             margin: 0;
             color: #ffffff;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
         .subtitle {
             font-size: 11px;
@@ -147,10 +152,9 @@ def serve_ui():
             align-items: center;
             gap: 5px;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         
-        /* --- HUB LAYER SELECTION INSIDE CARD --- */
+        /* --- QUIZ SELECTION HUB --- */
         .hub-container {
             display: flex;
             flex-direction: column;
@@ -163,12 +167,11 @@ def serve_ui():
             padding: 18px;
             text-align: left;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
         .hub-btn:hover {
             background: rgba(149, 121, 91, 0.15);
             border-color: rgb(149, 121, 91);
-            transform: translateY(-1px);
         }
         .hub-btn .title {
             font-size: 15px;
@@ -179,15 +182,13 @@ def serve_ui():
         .hub-btn .desc {
             font-size: 12px;
             color: #9c9893;
-            line-height: 1.4;
         }
 
-        /* --- ACTIVE TASK CONTROLS --- */
+        /* --- RUNTIME CONTROLS --- */
         .parameter-label {
             font-size: 11px;
             color: #9c9893;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 10px;
             font-weight: 700;
         }
@@ -209,8 +210,6 @@ def serve_ui():
             font-size: 16px;
             line-height: 1.5;
             margin-bottom: 24px;
-            color: #f5f4f2;
-            font-weight: 500;
         }
         .options-container {
             display: flex;
@@ -226,24 +225,17 @@ def serve_ui():
             text-align: left;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .option-btn:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(237, 228, 213, 0.2);
         }
         .correct {
             background: rgba(46, 204, 113, 0.15) !important;
             border-color: #2ecc71 !important;
             color: #2ecc71 !important;
-            font-weight: bold;
         }
         .wrong {
             background: rgba(231, 76, 60, 0.15) !important;
             border-color: #e74c3c !important;
             color: #e74c3c !important;
         }
-        
         .timeout-alert {
             background: rgba(231, 76, 60, 0.1);
             border: 1px solid rgba(231, 76, 60, 0.2);
@@ -251,17 +243,7 @@ def serve_ui():
             padding: 15px;
             margin-top: 20px;
             color: #ef9a9a;
-            font-size: 13px;
-            line-height: 1.4;
         }
-        .timeout-alert strong {
-            display: block;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-
         .next-btn, .restart-btn {
             background: #ffffff;
             color: #050403;
@@ -271,16 +253,9 @@ def serve_ui():
             cursor: pointer;
             font-weight: 700;
             width: 100%;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-top: 20px;
-            transition: opacity 0.2s ease;
         }
-        .next-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+        .next-btn:disabled { opacity: 0.4; }
     </style>
 </head>
 <body>
@@ -288,71 +263,94 @@ def serve_ui():
     <div class="main-title">Welcome to Xdzul</div>
 
     <div class="nav-container">
-        <div class="nav-item">🏠 Home</div>
-        <div class="nav-item">🎨 Art</div>
-        <div class="nav-item active">🛡️ Quiz</div>
-        <div class="nav-item">📸 Photograph</div>
+        <div class="nav-item" id="tab-home" onclick="switchTab('home')">🏠 Home</div>
+        <div class="nav-item" id="tab-art" onclick="switchTab('art')">🎨 Art</div>
+        <div class="nav-item active" id="tab-quiz" onclick="switchTab('quiz')">🛡️ Quiz</div>
+        <div class="nav-item" id="tab-photo" onclick="switchTab('photo')">📸 Photograph</div>
     </div>
 
-    <div class="quiz-card" id="main-card">
-        <div id="hub-view">
-            <div class="header">
-                <h2>Select Verification Hub</h2>
-            </div>
-            <div class="hub-container">
-                <div class="hub-btn" onclick="initiateQuizModule('seismic')">
-                    <div class="title">🔐 Seismic Quiz</div>
-                    <div class="desc">Privacy-preserving compliance blockchain infrastructure verification setup.</div>
-                </div>
-                <div class="hub-btn" onclick="initiateQuizModule('prismax')">
-                    <div class="title">🤖 PrismaX Quiz</div>
-                    <div class="desc">Physical AI & decentralized data shielded robotic model parameters.</div>
+    <div class="content-card">
+        
+        <div id="sec-home" class="view-section">
+            <div class="header"><h2>Home Node</h2></div>
+            <p style="color: #b5b2ad; text-align:center;">Welcome back to the main node console.</p>
+        </div>
+
+        <div id="sec-art" class="view-section">
+            <div class="header"><h2>Art Gallery</h2></div>
+            <p style="color: #b5b2ad; text-align:center;">Digital canvas elements and asset collections.</p>
+        </div>
+
+        <div id="sec-photo" class="view-section">
+            <div class="header"><h2>Photographs</h2></div>
+            <p style="color: #b5b2ad; text-align:center;">Captured snapshots and visual traces.</p>
+        </div>
+
+        <div id="sec-quiz" class="view-section active">
+            <div id="quiz-card-flow">
+                <div class="header"><h2>Select Verification Hub</h2></div>
+                <div class="hub-container">
+                    <div class="hub-btn" onclick="startQuizModule('seismic')">
+                        <div class="title">🔐 Seismic Quiz</div>
+                        <div class="desc">Privacy-preserving compliance blockchain verification setup.</div>
+                    </div>
+                    <div class="hub-btn" onclick="startQuizModule('prismax')">
+                        <div class="title">🤖 PrismaX Quiz</div>
+                        <div class="desc">Physical AI & decentralized data shielded robotic model parameters.</div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
         let quizzes=[],currentIdx=0,score=0,timeLeft=15,timerInterval=null,canClick=true,isTabActive=true;
-        let activeQuizType = '', selectedAnswer = null;
-        const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+        let activeQuizType = '';
 
-        function playRobotSound(type) {
-            try {
-                let osc=audioCtx.createOscillator();
-                let gain=audioCtx.createGain();
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                if(type==='correct') {
-                    osc.type='triangle'; osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
-                    osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); 
-                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-                    osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-                } else if(type==='wrong') {
-                    osc.type='sawtooth'; osc.frequency.setValueAtTime(130, audioCtx.currentTime); 
-                    osc.frequency.linearRampToValueAtTime(60, audioCtx.currentTime + 0.3); 
-                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                    osc.start(); osc.stop(audioCtx.currentTime + 0.3);
-                }
-            } catch(e){}
-        }
+        // Tab Switching Logic Fix
+        function switchTab(tabName) {
+            clearInterval(timerInterval);
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
 
-        async function initiateQuizModule(type) {
-            activeQuizType = type;
-            renderQuizSkeleton();
-            try{
-                let e=await fetch(`/get-quiz/\${type}`),t=await e.json();
-                quizzes=t.quizzes,currentIdx=0,score=0;
-                renderQuestion();
-            }catch(e){
-                document.getElementById("q-area").innerText="Failed to initialize pipeline parameters."
+            if(tabName === 'home') {
+                document.getElementById('tab-home').classList.add('active');
+                document.getElementById('sec-home').classList.add('active');
+            } else if(tabName === 'art') {
+                document.getElementById('tab-art').classList.add('active');
+                document.getElementById('sec-art').classList.add('active');
+            } else if(tabName === 'photo') {
+                document.getElementById('tab-photo').classList.add('active');
+                document.getElementById('sec-photo').classList.add('active');
+            } else if(tabName === 'quiz') {
+                document.getElementById('tab-quiz').classList.add('active');
+                document.getElementById('sec-quiz').classList.add('active');
+                resetToHubView();
             }
         }
 
-        function renderQuizSkeleton() {
-            let title = activeQuizType === 'seismic' ? 'Seismic Systems' : 'PrismaX';
-            let subtitle = activeQuizType === 'seismic' ? '🔒 COMPLIANCE ACTIVE | ⏱️ 0 S' : '🔒 PHYSICAL AI & DATA SHIELDED QUIZ';
+        function resetToHubView() {
+            document.getElementById("quiz-card-flow").innerHTML = `
+                <div class="header"><h2>Select Verification Hub</h2></div>
+                <div class="hub-container">
+                    <div class="hub-btn" onclick="startQuizModule('seismic')">
+                        <div class="title">🔐 Seismic Quiz</div>
+                        <div class="desc">Privacy-preserving compliance blockchain verification setup.</div>
+                    </div>
+                    <div class="hub-btn" onclick="startQuizModule('prismax')">
+                        <div class="title">🤖 PrismaX Quiz</div>
+                        <div class="desc">Physical AI & decentralized data shielded robotic model parameters.</div>
+                    </div>
+                </div>`;
+        }
+
+        async function startQuizModule(type) {
+            activeQuizType = type;
+            let title = type === 'seismic' ? 'Seismic Systems' : 'PrismaX';
+            let subtitle = type === 'seismic' ? '🔒 COMPLIANCE ACTIVE | ⏱️ 0 S' : '🔒 PHYSICAL AI & DATA SHIELDED QUIZ';
             
-            document.getElementById("main-card").innerHTML = `
+            document.getElementById("quiz-card-flow").innerHTML = `
                 <div class="header">
                     <h2>\${title}</h2>
                     <div class="subtitle">\${subtitle}</div>
@@ -360,11 +358,19 @@ def serve_ui():
                 <div id="quiz-runtime">
                     <div class="parameter-label" id="param-track">PARAMETER 00 / 00</div>
                     <div class="timer-bar-container"><div class="timer-bar" id="t-bar"></div></div>
-                    <div class="question" id="q-area">Loading active trace...</div>
+                    <div class="question" id="q-area">Initializing active trace...</div>
                     <div class="options-container" id="opts-area"></div>
                     <div id="alert-space"></div>
                     <button class="next-btn" id="next-action" disabled onclick="advanceSequence()">Next Parameter</button>
                 </div>`;
+                
+            try{
+                let e=await fetch(`/get-quiz/\${type}`),t=await e.json();
+                quizzes=t.quizzes,currentIdx=0,score=0;
+                renderQuestion();
+            }catch(e){
+                document.getElementById("q-area").innerText="Failed to initialize parameters."
+            }
         }
 
         function startTimer(){
@@ -385,7 +391,6 @@ def serve_ui():
         function renderQuestion(){
             if(currentIdx >= quizzes.length){ showFinalAnalytics(); return }
             startTimer();
-            selectedAnswer = null;
             document.getElementById("next-action").disabled = true;
             document.getElementById("alert-space").innerHTML = "";
             
@@ -407,30 +412,25 @@ def serve_ui():
         function validateSelection(btn, val, correctAns){
             if(!canClick) return;
             clearInterval(timerInterval); canClick = false;
-            
             let totalBtns = document.querySelectorAll(".option-btn");
             totalBtns.forEach(b => b.disabled = true);
             
             if(val === correctAns){
                 btn.classList.add("correct");
-                playRobotSound('correct');
                 score++;
             } else {
                 btn.classList.add("wrong");
-                playRobotSound('wrong');
                 totalBtns.forEach(b => { if(b.innerText === correctAns) b.classList.add("correct") });
             }
             document.getElementById("next-action").disabled = false;
         }
 
         function triggerTimeoutState(){
-            playRobotSound('wrong');
             let correctAns = quizzes[currentIdx].answer;
             document.querySelectorAll(".option-btn").forEach(b => {
                 b.disabled = true;
                 if(b.innerText === correctAns) b.classList.add("correct"); else b.classList.add("wrong");
             });
-            
             document.getElementById("alert-space").innerHTML = `
                 <div class="timeout-alert">
                     <strong>⏰ VERIFICATION TIMEOUT</strong>
@@ -446,18 +446,15 @@ def serve_ui():
 
         function showFinalAnalytics(){
             clearInterval(timerInterval);
-            document.getElementById("main-card").innerHTML = `
-                <div style="text-align:center; padding: 10px 0;">
-                    <h2 style="color:rgb(237, 228, 213); font-size:22px; margin-bottom:8px;">Session Terminated</h2>
-                    <div class="subtitle" style="margin-bottom:25px;">Trace Status: Logged</div>
-                    <p style="font-size:26px; color:#ffffff; font-weight:800; margin-bottom:30px;">Verification Score: \${score} / \${quizzes.length}</p>
-                    <button class="restart-btn" style="background:linear-gradient(90deg, rgb(149, 121, 91), rgb(237, 228, 213));" onclick="location.reload()">Return to Dashboard</button>
+            document.getElementById("quiz-card-flow").innerHTML = `
+                <div style="text-align:center;">
+                    <h2 style="color:rgb(237, 228, 213); font-size:20px; margin-bottom:8px;">Session Terminated</h2>
+                    <p style="font-size:24px; color:#ffffff; font-weight:800; margin-bottom:25px;">Score: \${score} / \${quizzes.length}</p>
+                    <button class="restart-btn" style="background:linear-gradient(90deg, rgb(149, 121, 91), rgb(237, 228, 213));" onclick="resetToHubView()">Return to Dashboard</button>
                 </div>`;
         }
 
-        document.addEventListener("visibilitychange", () => {
-            isTabActive = !document.hidden;
-        });
+        document.addEventListener("visibilitychange", () => { isTabActive = !document.hidden; });
     </script>
 </body>
 </html>"""
