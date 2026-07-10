@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- CORRECTED INTEGRATED SYSTEM DATA ---
+# --- COMPLETE DYNAMIC SEPARATED SYSTEM QUIZ BANKS ---
 SEISMIC_QUIZ_1_BANK = [
     {"id": 1, "question": "What is the primary focus of Seismic?", "options": ["A) Public gaming networks", "B) Privacy-preserving, compliance-friendly blockchain for fintech", "C) Decentralized storage for video streaming", "D) High-frequency NFT trading platforms"], "answer": "B) Privacy-preserving, compliance-friendly blockchain for fintech"},
     {"id": 2, "question": "Which domain extension must be used for the Seismic Name Service?", "options": ["A) .eth", "B) .sol", "C) .size", "D) .crypto"], "answer": "C) .size"},
@@ -263,21 +263,25 @@ def serve_ui():
 
     <div class="content-card">
         
+        <!-- HOME SECTION -->
         <div id="sec-home" class="view-section">
             <div class="header"><h2>Home Node</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Welcome back to the main node console.</p>
         </div>
 
+        <!-- ART SECTION -->
         <div id="sec-art" class="view-section">
             <div class="header"><h2>Art Gallery</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Digital canvas elements and asset collections.</p>
         </div>
 
+        <!-- PHOTOGRAPH SECTION -->
         <div id="sec-photo" class="view-section">
             <div class="header"><h2>Photographs</h2></div>
             <p style="color: #b5b2ad; text-align:center;">Captured snapshots and visual traces.</p>
         </div>
 
+        <!-- QUIZ PORTAL NODE -->
         <div id="sec-quiz" class="view-section active">
             <div id="quiz-card-flow">
                 <div class="header"><h2>Select Verification Hub</h2></div>
@@ -359,8 +363,8 @@ def serve_ui():
             
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div class="header">
-                    <h2>\--title--</h2>
-                    <div class="subtitle">\--subtitle--</div>
+                    <h2>` + title + `</h2>
+                    <div class="subtitle">` + subtitle + `</div>
                 </div>
                 <div id="quiz-runtime">
                     <div class="parameter-label" id="param-track">PARAMETER 00 / 00</div>
@@ -369,14 +373,17 @@ def serve_ui():
                     <div class="options-container" id="opts-area"></div>
                     <div id="alert-space"></div>
                     <button class="next-btn" id="next-action" disabled onclick="advanceSequence()">Next Parameter</button>
-                </div>`.replace('\--title--', title).replace('\--subtitle--', subtitle);
+                </div>`;
                 
-            try{
-                let e=await fetch(`/get-quiz/\${type}`),t=await e.json();
-                quizzes=t.quizzes,currentIdx=0,score=0;
+            try {
+                let e = await fetch('/get-quiz/' + type);
+                let t = await e.json();
+                quizzes = t.quizzes;
+                currentIdx = 0;
+                score = 0;
                 renderQuestion();
-            }catch(e){
-                document.getElementById("q-area").innerText="Failed to initialize parameters."
+            } catch(err) {
+                document.getElementById("q-area").innerText = "Failed to initialize parameters.";
             }
         }
 
@@ -402,7 +409,7 @@ def serve_ui():
             document.getElementById("alert-space").innerHTML = "";
             
             let q = quizzes[currentIdx];
-            document.getElementById("param-track").innerText = `PARAMETER \${String(currentIdx+1).padStart(2, '0')} / \${String(quizzes.length).padStart(2, '0')}`;
+            document.getElementById("param-track").innerText = "PARAMETER " + String(currentIdx+1).padStart(2, '0') + " / " + String(quizzes.length).padStart(2, '0');
             document.getElementById("q-area").innerText = q.question;
             
             let target = document.getElementById("opts-area");
@@ -456,7 +463,7 @@ def serve_ui():
             document.getElementById("quiz-card-flow").innerHTML = `
                 <div style="text-align:center;">
                     <h2 style="color:rgb(237, 228, 213); font-size:20px; margin-bottom:8px;">Session Terminated</h2>
-                    <p style="font-size:24px; color:#ffffff; font-weight:800; margin-bottom:25px;">Score: \${score} / \${quizzes.length}</p>
+                    <p style="font-size:24px; color:#ffffff; font-weight:800; margin-bottom:25px;">Score: ` + score + ` / ` + quizzes.length + `</p>
                     <button class="restart-btn" style="background:linear-gradient(90deg, rgb(149, 121, 91), rgb(237, 228, 213));" onclick="resetToHubView()">Return to Dashboard</button>
                 </div>`;
         }
